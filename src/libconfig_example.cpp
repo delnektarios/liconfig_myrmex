@@ -8,6 +8,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cstdlib>
+#include <list>
 #include <libconfig.h++>
 
 using namespace std;
@@ -80,23 +81,16 @@ int main(int argc, char **argv)
 
 		  const Setting &row = CameraL_trans[i];
 
-		  cout << "size = " <<row.getLength() <<endl;
-
 		  int inside_count = row.getLength();
-		  cout << "i = :" <<  i << endl;
 
 		  for(int j=0; j<inside_count; j++){
-
-			cout << "j= " << j <<endl;
 
 			Setting &values = row[j];
 
 			  double my_value = values;
 
-			  cout << setprecision(20) << my_value << endl;
 			  left[i][j] = my_value;
 		  }
-		  cout << endl;
 	  }
 
 	  if (matrices.getLength() == 2){
@@ -108,27 +102,21 @@ int main(int argc, char **argv)
 
 			  const Setting &row = CameraR_trans[i];
 
-			  cout << "size = " <<row.getLength() <<endl;
-
 			  int inside_count = row.getLength();
-			  cout << "i = :" <<  i << endl;
 
 			  for(int j=0; j<inside_count; j++){
-
-				cout << "j= " << j <<endl;
 
 				Setting &values = row[j];
 
 				  double my_value = values;
 
-				  cout << setprecision(20) << my_value << endl;
 				  right[i][j] = my_value;
 			  }
-			  cout << endl;
 		  }
 
 	  }
 
+	  cout << setprecision(20);
 
 	  for (int i=0;i<3;i++){
 		  for(int j=0;j<3;j++){
@@ -145,8 +133,17 @@ int main(int argc, char **argv)
 		  }
 	  }
 
-	  //cv::Mat TransL(3, 3, CV_8UC1, left);
-	  //cv::Mat TransR(3, 3, CV_8UC1, right);
+		cout << "CameraL: " << matrices.lookup("CameraL").getType() << endl;
+
+		cout << "CameraL: " << matrices.lookup("CameraL").isList() << endl;
+
+		cout << "CameraL: " << matrices.lookup("CameraL").isArray() << endl;
+
+		cout << "CameraL: " << matrices.lookup("CameraL").getIndex() << endl;
+		cout << "CameraR: " << matrices.lookup("CameraR").getIndex() << endl;
+
+		//cv::Mat TransL(3, 3, CV_8UC1, left);
+		//cv::Mat TransR(3, 3, CV_8UC1, right);
 
 
   }catch(const SettingNotFoundException &nfex){
