@@ -49,6 +49,24 @@ int main(int argc, char **argv)
 
   const Setting& root = cfg.getRoot();
 
+  try
+  {
+    string name = cfg.lookup("cameraID");
+    cout << "ID: " << name << endl << endl;
+
+    //Setting &info = root["cameraID"];
+
+    Setting &attr = root["connected_devices"]["attributes"];
+    string model;
+    attr[0].lookupValue("ID", model);
+    cout << "mdel: " << model << endl << endl;
+  }
+  catch(const SettingNotFoundException &nfex)
+  {
+    cerr << "No 'name' setting in configuration file." << endl;
+  }
+
+
   try{
 
 	  Setting &matrices = root["translation_matrices"];

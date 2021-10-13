@@ -4,5 +4,5 @@
 
 USER_OBJS :=
 
-LIBS := -lconfig++ -lopencv -lopencv2
+LIBS := -lconfig++
 
